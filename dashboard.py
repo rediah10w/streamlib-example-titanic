@@ -117,5 +117,3 @@ with c3:
     st.bar_chart(pcl, x="Label", y="Count", color="Color", height=410)
 
 
-
-st.title("Saludos a los que estan viendo este mensaje")
