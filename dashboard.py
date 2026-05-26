@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-import altair as alt
+
 
 
 st.set_page_config(
@@ -23,6 +23,9 @@ with col_btn:
     st.write("")
     
 
+
+
+st.dataframe(df.head(10))
 
 total       = len(df)
 surv_pct    = df["Survived"].mean() * 100
@@ -114,22 +117,5 @@ with c3:
     st.bar_chart(pcl, x="Label", y="Count", color="Color", height=410)
 
 
-st.markdown("---")
-st.subheader("Tabla de supervivencia por Sexo y Clase")
-st.caption("Porcentaje de pasajeros que sobrevivieron según sexo y clase del tiquete")
 
-_pivot = (
-    df.pivot_table(values="Survived", index="Sex", columns="Pclass", aggfunc="mean")
-    .mul(100)
-    .round(1)
-)
-_pivot.index = _pivot.index.map({"male": "Hombre", "female": "Mujer"})
-_pivot.columns = [f"{c}ª Clase" for c in _pivot.columns]
-_pivot.index.name = "Sexo"
-_pivot.columns.name = "Clase"
-
-st.dataframe(
-    _pivot.rename(columns=lambda c: c + "  (%)"),
-    use_container_width=True,
-)
 
